@@ -3,7 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 
-import routes from "./routes/index.js"; 
+import routes from "./routes/index.js";
 
 const app = express();
 
@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-app.use('/users', routes.users);
-app.use('/messages', routes.messages);
+app.use("/illustrations", routes.illustrations);
 
-export default app; 
+export default app;

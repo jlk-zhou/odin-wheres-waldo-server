@@ -1,7 +1,5 @@
-import users from "../modules/users/users.routes.js";
-import messages from "../modules/messages/messages.routes.js";
+import illustrations from "../modules/illustrations/illustrations.routes.js";
 
 export default {
-  users,
-  messages,
+  illustrations,
 };
