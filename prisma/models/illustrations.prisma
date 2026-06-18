@@ -1,0 +1,9 @@
+model Illustration {
+  id        String   @id @default(uuid())
+  name      String
+  characters Character[]
+  artists Artist[]
+  width_px Int
+  height_px Int
+  resource_url String
+}

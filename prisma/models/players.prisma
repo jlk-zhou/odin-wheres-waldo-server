@@ -1,0 +1,5 @@
+model Player {
+  id String @id @default(uuid())
+  record Record?
+  name String
+}

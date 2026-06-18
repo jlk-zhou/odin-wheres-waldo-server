@@ -1,0 +1,5 @@
+model Record {
+  id String @id @default(uuid())
+  player Player @relation(fields: [playerId], references: [id])
+  playerId String @unique
+}
