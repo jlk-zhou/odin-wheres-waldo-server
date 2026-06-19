@@ -235,7 +235,7 @@ beforeEach(async () => {
 });
 
 // Disconnect prisma from database before shutting db down
-afterEach(async () => {
+afterAll(async () => {
   await prisma.$disconnect();
   await pool.end();
 });
