@@ -1,9 +1,10 @@
 model Illustration {
   id        String   @id @default(uuid())
   name      String
-  characters Character[]
-  artists Artist[]
-  width_px Int
-  height_px Int
-  resource_url String
+  characters Character[] 
+  artist Artist @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  artistId String
+  widthPx Int
+  heightPx Int
+  resourceUrl String
 }

@@ -10,19 +10,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/illustrations", illustrations);
 
 describe("GET /illustrations", () => {
-  // beforeEach((done) => {
-  //   done();
-  // });
-
-  // afterEach(async () => {
-  //   await prisma.$disconnect(); 
-  //   await pool.end(); 
-  // }); 
-
   it("responds with json", (done) => {
     request(app)
       .get("/illustrations")
       .expect("Content-Type", /json/)
-      .expect(200, done);
+      .expect(200, done)
+      .expect([
+        {
+          id: "1",
+          name: "Doodle",
+          artistId: "1",
+          widthPx: 1000,
+          heightPx: 3000,
+          resourceUrl: "example.com",
+        },
+      ]);
   });
 });

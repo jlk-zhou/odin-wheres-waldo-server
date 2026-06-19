@@ -8,7 +8,7 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
-async function main() {
+export async function seedMaps() {
   // First illustration
   const roboTown = await prisma.illustration.create({
     data: {
@@ -17,109 +17,111 @@ async function main() {
         create: [
           {
             name: "Kamaji Pro",
-            x_start_px: 1210,
-            y_start_px: 2090,
-            x_end_px: 1360,
-            y_end_px: 2240,
+            xStartPx: 1210,
+            yStartPx: 2090,
+            xEndPx: 1360,
+            yEndPx: 2240,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/kamaji-pro_opbwyv.png",
           },
           {
             name: "Bathing Ape",
-            x_start_px: 1200,
-            y_start_px: 5490,
-            x_end_px: 1330,
-            y_end_px: 5620,
+            xStartPx: 1200,
+            yStartPx: 5490,
+            xEndPx: 1330,
+            yEndPx: 5620,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776361/bathing-ape_y7rsj3.png",
           },
           {
             name: "Botchan",
-            x_start_px: 1645,
-            y_start_px: 5885,
-            x_end_px: 1700,
-            y_end_px: 6010,
+            xStartPx: 1645,
+            yStartPx: 5885,
+            xEndPx: 1700,
+            yEndPx: 6010,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/botchan_tobmwu.png",
           },
           {
             name: "Waldo",
-            x_start_px: 1600,
-            y_start_px: 6720,
-            x_end_px: 1680,
-            y_end_px: 6800,
+            xStartPx: 1600,
+            yStartPx: 6720,
+            xEndPx: 1680,
+            yEndPx: 6800,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/waldo_zxvoln.png",
           },
           {
             name: "Kumamon",
-            x_start_px: 1200,
-            y_start_px: 7340,
-            x_end_px: 1310,
-            y_end_px: 7450,
+            xStartPx: 1200,
+            yStartPx: 7340,
+            xEndPx: 1310,
+            yEndPx: 7450,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/kumamon_evq4om.png",
           },
           {
             name: "Kenny",
-            x_start_px: 1150,
-            y_start_px: 6080,
-            x_end_px: 1230,
-            y_end_px: 6160,
+            xStartPx: 1150,
+            yStartPx: 6080,
+            xEndPx: 1230,
+            yEndPx: 6160,
             image_url:
               "https://res.cloudinary.com/deohvijjz/image/upload/v1781776361/kenny_d2xccu.png",
           },
           {
-            name: "Aang", 
-            x_start_px: 90, 
-            y_start_px: 6080, 
-            x_end_px: 170, 
-            y_end_px: 6160, 
-            image_url: "https://res.cloudinary.com/deohvijjz/image/upload/v1781776361/aang_eyo65g.png", 
-          }, 
+            name: "Aang",
+            xStartPx: 90,
+            yStartPx: 6080,
+            xEndPx: 170,
+            yEndPx: 6160,
+            image_url:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1781776361/aang_eyo65g.png",
+          },
           {
-            name: "Kaonashi", 
-            x_start_px: 1175, 
-            y_start_px: 2620, 
-            x_end_px: 1255, 
-            y_end_px: 2700, 
-            image_url: "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/kaonashi_gdnjnw.png", 
-          }, 
+            name: "Kaonashi",
+            xStartPx: 1175,
+            yStartPx: 2620,
+            xEndPx: 1255,
+            yEndPx: 2700,
+            image_url:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/kaonashi_gdnjnw.png",
+          },
           {
-            name: "Tom", 
-            x_start_px: 1675, 
-            y_start_px: 7695, 
-            x_end_px: 1775, 
-            y_end_px: 7795, 
-            image_url: "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/tom_b7n9tw.png", 
-          }, 
+            name: "Tom",
+            xStartPx: 1675,
+            yStartPx: 7695,
+            xEndPx: 1775,
+            yEndPx: 7795,
+            image_url:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1781776362/tom_b7n9tw.png",
+          },
           {
-            name: "Turnip Head", 
-            x_start_px: 855, 
-            y_start_px: 3930, 
-            x_end_px: 955, 
-            y_end_px: 4030, 
-            image_url: "https://res.cloudinary.com/deohvijjz/image/upload/v1781776363/turnip-head_v65vmh.png"
-          }
-        ],
-      },
-      artists: {
-        create: [
-          {
-            name: "Egor Klyuchnyk",
-            website: "https://chekavo.artstation.com/",
+            name: "Turnip Head",
+            xStartPx: 855,
+            yStartPx: 3930,
+            xEndPx: 955,
+            yEndPx: 4030,
+            image_url:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1781776363/turnip-head_v65vmh.png",
           },
         ],
       },
-      width_px: 2000,
-      height_px: 8000,
-      resource_url:
+      artist: {
+        create: {
+          name: "Egor Klyuchnyk",
+          website: "https://chekavo.artstation.com/",
+        },
+      },
+      widthPx: 2000,
+      heightPx: 8000,
+      resourceUrl:
         "https://res.cloudinary.com/deohvijjz/image/upload/v1781776364/map_fl1qsu.jpg",
     },
   });
 }
 
-main()
+seedMaps()
   .then(async () => {
     await prisma.$disconnect();
     await pool.end();

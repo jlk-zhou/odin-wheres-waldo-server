@@ -1,11 +1,11 @@
 model Character {
   id        String    @id @default(uuid())
   name String
-  illustration Illustration @relation(fields: [illustrationId], references: [id])
+  illustration Illustration @relation(fields: [illustrationId], references: [id], onDelete: Cascade)
   illustrationId String
-  x_start_px Int
-  y_start_px Int
-  x_end_px Int
-  y_end_px Int
+  xStartPx Int
+  yStartPx Int
+  xEndPx Int
+  yEndPx Int
   image_url String
 }
