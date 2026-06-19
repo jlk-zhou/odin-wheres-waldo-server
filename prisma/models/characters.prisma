@@ -7,5 +7,5 @@ model Character {
   yStartPx Int
   xEndPx Int
   yEndPx Int
-  image_url String
+  imageUrl String
 }

@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/illustrations", illustrations);
 
 describe("GET /illustrations", () => {
-  it("responds with json", (done) => {
+  it("retrieves a list of all illustrations in database", (done) => {
     request(app)
       .get("/illustrations")
       .expect("Content-Type", /json/)
@@ -22,7 +22,23 @@ describe("GET /illustrations", () => {
           artistId: "1",
           widthPx: 1000,
           heightPx: 3000,
-          resourceUrl: "example.com",
+          resourceUrl: "doodle.com",
+        },
+        {
+          id: "2",
+          name: "Graffiti",
+          artistId: "1",
+          widthPx: 2000,
+          heightPx: 5000,
+          resourceUrl: "graffiti.com",
+        },
+        {
+          id: "3",
+          name: "Mural",
+          artistId: "1",
+          widthPx: 1500,
+          heightPx: 6500,
+          resourceUrl: "mural.com",
         },
       ]);
   });
