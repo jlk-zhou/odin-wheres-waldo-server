@@ -7,6 +7,7 @@ import routes from "./routes/index.js";
 
 import notFoundHandler from "./errors/notFoundHandler.js";
 import errorMiddleware from "./errors/errorMiddleware.js"; 
+import { prismaErrorHandler } from "./errors/prismaErrorHandler.js";
 
 const app = express();
 
@@ -16,7 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/illustrations", routes.illustrations);
+
 app.use(notFoundHandler); 
+app.use(prismaErrorHandler); 
 app.use(errorMiddleware); 
 
 export default app;

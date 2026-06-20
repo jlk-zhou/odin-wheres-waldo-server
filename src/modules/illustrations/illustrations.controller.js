@@ -1,8 +1,8 @@
 import { prisma } from "../../lib/prisma.js";
 import _ from "lodash";
 
-export async function getAllIllustrations(req, res) {
-  const illustrations = await prisma.illustration.findMany();
+export async function getAllIllustrations(req, res, next) {
+  const illustrations = await prisma.illustration.findMany().catch(next);
   return res.send(illustrations);
 }
 
@@ -15,7 +15,7 @@ export async function getIllustrationCharacters(req, res) {
       characters: true,
     },
   });
-  
+
   let characters = illustration.characters;
   if (req.query.n) {
     characters = _.sampleSize(characters, req.query.n);
