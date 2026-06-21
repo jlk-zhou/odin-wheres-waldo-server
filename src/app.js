@@ -5,8 +5,8 @@ import express from "express";
 
 import routes from "./routes/index.js";
 
-import notFoundHandler from "./errors/notFoundHandler.js";
-import errorMiddleware from "./errors/errorMiddleware.js"; 
+import notFoundController from "./errors/notFoundController.js";
+import errorHandler from "./errors/errorHandler.js"; 
 import { prismaErrorHandler } from "./errors/prismaErrorHandler.js";
 
 const app = express();
@@ -18,8 +18,8 @@ app.use(cors());
 
 app.use("/illustrations", routes.illustrations);
 
-app.use(notFoundHandler); 
+app.use(notFoundController); 
 app.use(prismaErrorHandler); 
-app.use(errorMiddleware); 
+app.use(errorHandler); 
 
 export default app;

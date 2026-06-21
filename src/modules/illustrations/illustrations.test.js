@@ -6,11 +6,19 @@ import express from "express";
 import { pool, prisma } from "../../lib/prisma.js";
 
 import _ from "lodash";
+import { NotFoundError } from "../../utils/errors.js";
+import notFoundController from "../../errors/notFoundController.js";
+import { prismaErrorHandler } from "../../errors/prismaErrorHandler.js";
+import errorHandler from "../../errors/errorHandler.js";
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use("/illustrations", illustrations);
+
+app.use(notFoundController);
+app.use(prismaErrorHandler);
+app.use(errorHandler);
 
 describe("GET /illustrations", () => {
   it("retrieves a list of all illustrations in database", (done) => {
@@ -151,13 +159,30 @@ describe("GET /illustrations/{id}/characters?n={3}", () => {
     jest.restoreAllMocks();
   });
 
+  it("returns an error for trying to select characters from a non-existent map", (done) => {
+    request(app)
+      .get("/illustrations/fakeid/characters")
+      .expect({ error: "Cannot find illustration with id 'fakeid'" })
+      .expect(404, done);
+  });
+
+  it("returns an error for providing an invalid query", (done) => {
+    request(app)
+      .get("/illustrations/1/characters?n=-67")
+      .expect({ error: "Please enter a positive integer for query 'n'." })
+      .expect(400, done);
+
+    request(app)
+      .get("/illustrations/2/characters?n=cat")
+      .expect({ error: "Please enter a positive integer for query 'n'." })
+      .expect(400, done); 
+  });
+
   it("returns an error for trying to select more characters than there are in a map", (done) => {
     request(app)
       .get("/illustrations/3/characters")
-      .query({n: 100})
-      .expect({
-        error: "Please select fewer than all characters available in this map."
-      })
-      .expect(400, done)
+      .query({ n: 100 })
+      .expect({ error: "Please select fewer than all characters in the map." })
+      .expect(400, done);
   });
 });
