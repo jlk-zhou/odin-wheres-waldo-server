@@ -175,7 +175,7 @@ describe("GET /illustrations/{id}/characters?n={3}", () => {
     request(app)
       .get("/illustrations/2/characters?n=cat")
       .expect({ error: "Please enter a positive integer for query 'n'." })
-      .expect(400, done); 
+      .expect(400, done);
   });
 
   it("returns an error for trying to select more characters than there are in a map", (done) => {
@@ -184,5 +184,25 @@ describe("GET /illustrations/{id}/characters?n={3}", () => {
       .query({ n: 100 })
       .expect({ error: "Please select fewer than all characters in the map." })
       .expect(400, done);
+  });
+});
+
+describe("GET /illustrations/{id}/artist", () => {
+  it("retrieves the artist of a given illustration", (done) => {
+    request(app)
+      .get("/illustrations/1/artist")
+      .expect({
+        id: "1",
+        name: "Banksy",
+        website: "banksy.com",
+      })
+      .expect(200, done);
+  });
+
+  it("returns an error for trying to select artist from a non-existent illustration", (done) => {
+    request(app)
+      .get("/illustrations/fakeid/artist")
+      .expect({ error: "Cannot find illustration with id 'fakeid'" })
+      .expect(404, done);
   });
 });
