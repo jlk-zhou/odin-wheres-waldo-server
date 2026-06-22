@@ -24,8 +24,10 @@ export async function getAllRecords(req, res, next) {
   if (req.query.n) {
     if (!req.query.sortAscend) {
       return next(
-        new BadRequestError("Query 'n' is meant to be used together with query 'sortAscend' to return the top n records. Please set sortAscend to true.")
-      )
+        new BadRequestError(
+          "Query 'n' is meant to be used together with query 'sortAscend' to return the top n records. Please set sortAscend to true.",
+        ),
+      );
     }
     if (!Number.isInteger(+req.query.n) || req.query.n <= 0) {
       return next(
@@ -44,4 +46,35 @@ export async function getAllRecords(req, res, next) {
   const records = await prisma.record.findMany(query);
 
   return res.json(records);
+}
+
+export async function createRecord(req, res, next) {
+  if (!req.body.name || !req.body.durationMs) {
+    return next(
+      new BadRequestError(
+        "Both 'name' and 'durationMs' are required bodies. Please send them both over.",
+      ),
+    );
+  }
+
+  if (!Number.isInteger(+req.body.durationMs) || req.body.durationMs <= 0) {
+    return next(
+      new BadRequestError(
+        "Body 'durationMs' is invalid. It must be a positive integer.",
+      ),
+    );
+  }
+
+  const record = await prisma.record.create({
+    data: {
+      durationMs: req.body.durationMs,
+      player: {
+        create: {
+          name: req.body.name,
+        },
+      },
+    },
+  });
+
+  res.json(record);
 }

@@ -5,4 +5,6 @@ const router = Router();
 
 router.get("/", recordsController.getAllRecords);
 
+router.post("/", recordsController.createRecord); 
+
 export default router;

@@ -108,3 +108,51 @@ describe("GET /records", () => {
     expect(response.body.error).toMatch(/(sortAscend|n)/);
   });
 });
+
+describe("POST /records", () => {
+  it("allows user to create a new record in database", async () => {
+    // Check if server returns the new record upon its creation
+    const createRecord = await request(app)
+      .post("/records")
+      .set("Accept", "application/json")
+      .send({ name: "John", durationMs: 73294 })
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(createRecord.body).toMatchObject({
+      id: expect.any(String),
+      playerId: expect.any(String),
+      durationMs: expect.toBeInteger(),
+    });
+
+    // Check if the record is indeed added to the db
+    const getAllRecords = await request(app)
+      .get("/records")
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(getAllRecords.body.length).toEqual(16);
+  });
+
+  it("returns an error for not providing either player name or time", async () => {
+    const createRecord = await request(app)
+      .post("/records")
+      .set("Accept", "application/json")
+      .send({})
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(createRecord.body.error).toMatch(/(name|durationMs|required)/);
+  });
+
+  it("returns an error for providing invalid time", async () => {
+    const createRecord = await request(app)
+      .post("/records")
+      .set("Accept", "application/json")
+      .send({ name: "Goofy", durationMs: "Mickey Mouse" })
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(createRecord.body.error).toMatch(/(name|invalid|valid)/);
+  });
+});
