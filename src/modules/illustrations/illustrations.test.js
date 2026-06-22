@@ -1,24 +1,8 @@
-import illustrations from "./illustrations.routes.js";
-
+import app from "../../tests/testApp.js"; 
 import { it, jest } from "@jest/globals";
 import request from "supertest";
-import express from "express";
-import { pool, prisma } from "../../lib/prisma.js";
 
 import _ from "lodash";
-import { NotFoundError } from "../../utils/errors.js";
-import notFoundController from "../../errors/notFoundController.js";
-import { prismaErrorHandler } from "../../errors/prismaErrorHandler.js";
-import errorHandler from "../../errors/errorHandler.js";
-
-const app = express();
-
-app.use(express.urlencoded({ extended: false }));
-app.use("/illustrations", illustrations);
-
-app.use(notFoundController);
-app.use(prismaErrorHandler);
-app.use(errorHandler);
 
 describe("GET /illustrations", () => {
   it("retrieves a list of all illustrations in database", (done) => {

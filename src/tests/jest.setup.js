@@ -26,7 +26,7 @@ beforeEach(async () => {
         characters: {
           create: [
             {
-              id: "1", 
+              id: "1",
               name: "Totoro",
               xStartPx: 150,
               xEndPx: 250,
@@ -35,7 +35,7 @@ beforeEach(async () => {
               imageUrl: "totoro.png",
             },
             {
-              id: "2", 
+              id: "2",
               name: "Pikachu",
               xStartPx: 430,
               xEndPx: 530,
@@ -44,7 +44,7 @@ beforeEach(async () => {
               imageUrl: "pikachu.png",
             },
             {
-              id: "3", 
+              id: "3",
               name: "Waldo",
               xStartPx: 650,
               xEndPx: 750,
@@ -53,7 +53,7 @@ beforeEach(async () => {
               imageUrl: "waldo.png",
             },
             {
-              id: "4", 
+              id: "4",
               name: "Morty",
               xStartPx: 330,
               xEndPx: 430,
@@ -62,7 +62,7 @@ beforeEach(async () => {
               imageUrl: "morty.png",
             },
             {
-              id: "5", 
+              id: "5",
               name: "Jerry",
               xStartPx: 800,
               xEndPx: 900,
@@ -87,7 +87,7 @@ beforeEach(async () => {
         characters: {
           create: [
             {
-              id: "6", 
+              id: "6",
               name: "Forrest Gump",
               xStartPx: 1700,
               xEndPx: 1800,
@@ -96,7 +96,7 @@ beforeEach(async () => {
               imageUrl: "forrest_gump.png",
             },
             {
-              id: "7", 
+              id: "7",
               name: "Claudia",
               xStartPx: 100,
               xEndPx: 200,
@@ -105,7 +105,7 @@ beforeEach(async () => {
               imageUrl: "claudia.png",
             },
             {
-              id: "8", 
+              id: "8",
               name: "Alyosha",
               xStartPx: 600,
               xEndPx: 700,
@@ -114,7 +114,7 @@ beforeEach(async () => {
               imageUrl: "alyosha.png",
             },
             {
-              id: "9", 
+              id: "9",
               name: "Faust",
               xStartPx: 1100,
               xEndPx: 1200,
@@ -123,7 +123,7 @@ beforeEach(async () => {
               imageUrl: "faust.png",
             },
             {
-              id: "10", 
+              id: "10",
               name: "Spongebob Squarepants",
               xStartPx: 660,
               xEndPx: 760,
@@ -148,7 +148,7 @@ beforeEach(async () => {
         characters: {
           create: [
             {
-              id: "11", 
+              id: "11",
               name: "Wukong",
               xStartPx: 260,
               xEndPx: 270,
@@ -157,7 +157,7 @@ beforeEach(async () => {
               imageUrl: "wukong.png",
             },
             {
-              id: "12", 
+              id: "12",
               name: "Ziggy",
               xStartPx: 340,
               xEndPx: 440,
@@ -166,7 +166,7 @@ beforeEach(async () => {
               imageUrl: "ziggy.png",
             },
             {
-              id: "13", 
+              id: "13",
               name: "Pink Panther",
               xStartPx: 620,
               xEndPx: 720,
@@ -175,23 +175,23 @@ beforeEach(async () => {
               imageUrl: "pink_panther.png",
             },
             {
-              id: "14", 
-              name: "Ashe", 
-              xStartPx: 1240, 
-              xEndPx: 1340, 
-              yStartPx: 5370, 
-              yEndPx: 5470, 
-              imageUrl: "ashe.png", 
-            }, 
+              id: "14",
+              name: "Ashe",
+              xStartPx: 1240,
+              xEndPx: 1340,
+              yStartPx: 5370,
+              yEndPx: 5470,
+              imageUrl: "ashe.png",
+            },
             {
-              id: "15", 
-              name: "Chihiro", 
-              xStartPx: 770, 
-              xEndPx: 870, 
-              yStartPx: 6100, 
-              yEndPx: 6200, 
-              imageUrl: "chihiro.png", 
-            }
+              id: "15",
+              name: "Chihiro",
+              xStartPx: 770,
+              xEndPx: 870,
+              yStartPx: 6100,
+              yEndPx: 6200,
+              imageUrl: "chihiro.png",
+            },
           ],
         },
         widthPx: 1500,
@@ -200,33 +200,153 @@ beforeEach(async () => {
       },
     }),
 
-    // Populate database with records
+    // Records
     prisma.record.create({
       data: {
-        durationMs: 74329,
+        durationMs: 74918,
         player: {
           create: {
-            name: "psycho goldfish",
+            name: "Lonely Lion",
           },
         },
       },
     }),
     prisma.record.create({
       data: {
-        durationMs: 63910,
+        durationMs: 83629,
         player: {
           create: {
-            name: "wild flower frog",
+            name: "Classy Chipmunk",
           },
         },
       },
     }),
     prisma.record.create({
       data: {
-        durationMs: 88271,
+        durationMs: 66530,
         player: {
           create: {
-            name: "garlic panda bread",
+            name: "Optimistic Opossum",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 53920,
+        player: {
+          create: {
+            name: "Dainty Dingo",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 67932,
+        player: {
+          create: {
+            name: "Calm Capybara",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 30298,
+        player: {
+          create: {
+            name: "Skillful Squirrel",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 50398,
+        player: {
+          create: {
+            name: "Wimpy Wolf",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 68293,
+        player: {
+          create: {
+            name: "Kind Kitten",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 78301,
+        player: {
+          create: {
+            name: "Wholesome Whale",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 72619,
+        player: {
+          create: {
+            name: "Dominant Dolphin",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 40392,
+        player: {
+          create: {
+            name: "Muscular Mouse",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 54928,
+        player: {
+          create: {
+            name: "Giant Giraffe",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 28739,
+        player: {
+          create: {
+            name: "Awesome Aardvark",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 56489,
+        player: {
+          create: {
+            name: "Puffy Penguin",
+          },
+        },
+      },
+    }),
+    prisma.record.create({
+      data: {
+        durationMs: 79287,
+        player: {
+          create: {
+            name: "Sad Seal",
           },
         },
       },

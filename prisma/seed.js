@@ -8,7 +8,7 @@ const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
-export async function seedMaps() {
+export async function main() {
   // First illustration
   const roboTown = await prisma.illustration.create({
     data: {
@@ -119,9 +119,175 @@ export async function seedMaps() {
         "https://res.cloudinary.com/deohvijjz/image/upload/v1781776364/map_fl1qsu.jpg",
     },
   });
+
+  // Records
+  const record1 = await prisma.record.create({
+    data: {
+      durationMs: 74918,
+      player: {
+        create: {
+          name: "Lonely Lion",
+        },
+      },
+    },
+  });
+
+  const record2 = await prisma.record.create({
+    data: {
+      durationMs: 83629,
+      player: {
+        create: {
+          name: "Classy Chipmunk",
+        },
+      },
+    },
+  });
+
+  const record3 = await prisma.record.create({
+    data: {
+      durationMs: 66530,
+      player: {
+        create: {
+          name: "Optimistic Opossum",
+        },
+      },
+    },
+  });
+
+  const record4 = await prisma.record.create({
+    data: {
+      durationMs: 53920,
+      player: {
+        create: {
+          name: "Dainty Dingo",
+        },
+      },
+    },
+  });
+
+  const record5 = await prisma.record.create({
+    data: {
+      durationMs: 67932,
+      player: {
+        create: {
+          name: "Calm Capybara",
+        },
+      },
+    },
+  });
+
+  const record6 = await prisma.record.create({
+    data: {
+      durationMs: 30298,
+      player: {
+        create: {
+          name: "Skillful Squirrel",
+        },
+      },
+    },
+  });
+
+  const record7 = await prisma.record.create({
+    data: {
+      durationMs: 50398,
+      player: {
+        create: {
+          name: "Wimpy Wolf",
+        },
+      },
+    },
+  });
+
+  const record8 = await prisma.record.create({
+    data: {
+      durationMs: 68293,
+      player: {
+        create: {
+          name: "Kind Kitten",
+        },
+      },
+    },
+  });
+
+  const record9 = await prisma.record.create({
+    data: {
+      durationMs: 78301,
+      player: {
+        create: {
+          name: "Wholesome Whale",
+        },
+      },
+    },
+  });
+
+  const record10 = await prisma.record.create({
+    data: {
+      durationMs: 72619,
+      player: {
+        create: {
+          name: "Dominant Dolphin",
+        },
+      },
+    },
+  });
+
+  const record11 = await prisma.record.create({
+    data: {
+      durationMs: 40392,
+      player: {
+        create: {
+          name: "Muscular Mouse",
+        },
+      },
+    },
+  });
+
+  const record12 = await prisma.record.create({
+    data: {
+      durationMs: 54928,
+      player: {
+        create: {
+          name: "Giant Giraffe",
+        },
+      },
+    },
+  });
+
+  const record13 = await prisma.record.create({
+    data: {
+      durationMs: 28739,
+      player: {
+        create: {
+          name: "Awesome Aardvark",
+        },
+      },
+    },
+  });
+
+  const record14 = await prisma.record.create({
+    data: {
+      durationMs: 56489,
+      player: {
+        create: {
+          name: "Puffy Penguin",
+        },
+      },
+    },
+  });
+
+  const record15 = await prisma.record.create({
+    data: {
+      durationMs: 79287,
+      player: {
+        create: {
+          name: "Sad Seal",
+        },
+      },
+    },
+  });
 }
 
-seedMaps()
+main()
   .then(async () => {
     await prisma.$disconnect();
     await pool.end();
