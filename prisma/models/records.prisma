@@ -1,6 +1,6 @@
 model Record {
-  id String @id @default(uuid())
-  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
-  playerId String @unique
+  id         String @id @default(uuid())
+  playerId   String @unique
   durationMs Int
+  player     Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
 }

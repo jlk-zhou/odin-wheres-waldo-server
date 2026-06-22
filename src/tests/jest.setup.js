@@ -10,6 +10,7 @@ beforeEach(async () => {
     // Delete everything in the database
     prisma.artist.deleteMany(),
     prisma.record.deleteMany(),
+    prisma.player.deleteMany(), 
 
     // Populate database with maps
     prisma.illustration.create({

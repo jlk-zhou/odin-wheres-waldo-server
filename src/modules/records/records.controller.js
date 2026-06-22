@@ -65,7 +65,34 @@ export async function createRecord(req, res, next) {
     );
   }
 
-  const record = await prisma.record.create({
+  const player = await prisma.player.findUnique({
+    where: {
+      name: req.body.name,
+    },
+    include: {
+      record: true,
+    },
+  });
+
+  if (player) {
+    if (req.body.durationMs < player.record.durationMs) {
+      const updateRecord = await prisma.record.update({
+        where: {
+          id: player.record.id,
+        },
+        data: {
+          durationMs: req.body.durationMs,
+        },
+      });
+      return res.json(updateRecord); 
+    } else {
+      return res.json({
+        message: `Player ${player.name} did not beat their record. No update is made.`
+      })
+    }
+  }
+
+  const createRecord = await prisma.record.create({
     data: {
       durationMs: req.body.durationMs,
       player: {
@@ -75,6 +102,5 @@ export async function createRecord(req, res, next) {
       },
     },
   });
-
-  res.json(record);
+  return res.json(createRecord);
 }

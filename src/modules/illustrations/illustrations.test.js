@@ -1,4 +1,4 @@
-import app from "../../tests/testApp.js"; 
+import app from "../../tests/testApp.js";
 import { it, jest } from "@jest/globals";
 import request from "supertest";
 
@@ -168,6 +168,98 @@ describe("GET /illustrations/{id}/characters?n={3}", () => {
       .query({ n: 100 })
       .expect({ error: "Please select fewer than all characters in the map." })
       .expect(400, done);
+  });
+});
+
+describe("GET /illustrations/{id}/characters/{id}?x={1000}&y={1000}", () => {
+  it("returns true if character can be found in given coordinate within the map", (done) => {
+    request(app)
+      .get("/illustrations/1/characters/4")
+      .query({ x: 370, y: 2630 })
+      .expect("Content-Type", /json/)
+      .expect({ found: true })
+      .expect(200, done);
+  });
+
+  it("returns false if character cannot be found in given coordinate", async () => {
+    const xMissYMiss = await request(app)
+      .get("/illustrations/1/characters/1")
+      .query({ x: 398, y: 936 })
+      .expect("Content-Type", /json/)
+      .expect({ found: false })
+      .expect(200);
+
+    const xHitYMiss = await request(app)
+      .get("/illustrations/2/characters/8")
+      .query({ x: 639, y: 3857 })
+      .expect("Content-Type", /json/)
+      .expect({ found: false })
+      .expect(200);
+
+    const xMissYHit = await request(app)
+      .get("/illustrations/3/characters/15")
+      .query({ x: 1267, y: 6153 })
+      .expect("Content-Type", /json/)
+      .expect({ found: false })
+      .expect(200);
+  });
+
+  it("returns an error for not being able to find character or illustration", async () => {
+    const cantFindBoth = await request(app)
+      .get("/illustrations/boo/characters/ucantfindme")
+      .query({ x: 203, y: 404 })
+      .expect("Content-Type", /json/)
+      .expect(404);
+    expect(cantFindBoth.body.error).toMatch(
+      /(cannot|can't|find|illustration|map|)/i,
+    );
+
+    const cantFindCharacter = await request(app)
+      .get("/illustrations/2/characters/ucantfindme")
+      .query({ x: 203, y: 404 })
+      .expect("Content-Type", /json/)
+      .expect(404);
+    expect(cantFindCharacter.body.error).toMatch(
+      /(cannot|can't|find|illustration|map|character)/i,
+    );
+
+    const cantFindIllustration = await request(app)
+      .get("/illustrations/boo/characters/7")
+      .query({ x: 203, y: 404 })
+      .expect("Content-Type", /json/)
+      .expect(404);
+    expect(cantFindIllustration.body.error).toMatch(
+      /(cannot|can't|find|illustration|map)/i,
+    );
+  });
+
+  it("returns an error for missing any coordinate", async () => {
+    const response = await request(app)
+      .get("/illustrations/2/characters/9")
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(response.body.error).toMatch(/(x|y|coordinates)/);
+  });
+
+  it("returns an error for invalid x and y coordinates", async () => {
+    const response = await request(app)
+      .get("/illustrations/3/characters/11")
+      .query({ x: "lueluelue", y: "-100" })
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(response.body.error).toMatch(/(x|y|positive|integers)/);
+  });
+
+  it("returns an error for coordinates that are out of the map's bound", async () => {
+    const response = await request(app)
+      .get("/illustrations/1/characters/2")
+      .query({ x: 100000, y: 200000 })
+      .expect("Content-Type", /json/)
+      .expect(400);
+
+    expect(response.body.error).toMatch(/(coordinates|within|outof|bound)/);
   });
 });
 

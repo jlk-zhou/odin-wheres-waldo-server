@@ -1,5 +1,5 @@
 model Player {
-  id String @id @default(uuid())
+  id     String  @id @default(uuid())
+  name   String  @unique
   record Record?
-  name String
 }

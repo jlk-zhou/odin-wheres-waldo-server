@@ -3,7 +3,7 @@ import { it } from "@jest/globals";
 import request from "supertest";
 import isSortedAscend from "./util/isSortedAscend.js";
 
-describe("GET /records", () => {
+describe("GET /records?sortAscend={true}&n={10}", () => {
   it("retrieves all records in database", async () => {
     const response = await request(app)
       .get("/records")
@@ -132,6 +132,42 @@ describe("POST /records", () => {
       .expect(200);
 
     expect(getAllRecords.body.length).toEqual(16);
+  });
+
+  it("updates user's record if user provides an existing name and beats that name's record", async () => {
+    const response = await request(app)
+      .post("/records")
+      .set("Accept", "application/json")
+      .send({ name: "Giant Giraffe", durationMs: 53000 })
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    // Total number of record should not change
+    const getAllRecords = await request(app)
+      .get("/records")
+      .expect("Content-Type", /json/)
+      .expect(200);
+    expect(getAllRecords.body.length).toEqual(15);
+  });
+
+  it("does not update record if user does not beat their record", async () => {
+    const response = await request(app)
+      .post("/records")
+      .set("Accept", "application/json")
+      .send({ name: "Awesome Aardvark", durationMs: 200000 })
+      .expect("Content-Type", /json/)
+      .expect(200);
+
+    expect(response.body.message).toMatch(
+      /(did\snot|didn't|beat|record|no|update)/,
+    );
+
+    // Total number of record should not change
+    const getAllRecords = await request(app)
+      .get("/records")
+      .expect("Content-Type", /json/)
+      .expect(200);
+    expect(getAllRecords.body.length).toEqual(15);
   });
 
   it("returns an error for not providing either player name or time", async () => {
