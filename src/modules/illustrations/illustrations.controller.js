@@ -60,10 +60,10 @@ export async function foundCharacterInMap(req, res, next) {
     );
   }
 
-  if (!isPositiveInteger(req.query.x) || !isPositiveInteger(req.query.y)) {
+  if (req.query.x <= 0 || req.query.y <= 0) {
     return next(
       new BadRequestError(
-        "Both x and y coordinates have to be positive integers",
+        "Both x and y coordinates have to be positive numbers",
       ),
     );
   }
