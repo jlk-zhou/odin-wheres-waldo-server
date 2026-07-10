@@ -1,3 +1,4 @@
+import { matchedData } from "express-validator";
 import { prisma } from "../../lib/prisma.js";
 import { BadRequestError } from "../../utils/errors.js";
 
@@ -35,12 +36,9 @@ export async function getAllRecords(req, res, next) {
       );
     }
     const totalRecords = await prisma.record.count();
-    if (req.query.n > totalRecords) {
-      return next(
-        new BadRequestError("Please select fewer records than there are."),
-      );
+    if (req.query.n < totalRecords) {
+      query.take = +req.query.n;
     }
-    query.take = +req.query.n;
   }
 
   const records = await prisma.record.findMany(query);
@@ -49,25 +47,10 @@ export async function getAllRecords(req, res, next) {
 }
 
 export async function createRecord(req, res, next) {
-  if (!req.body.name || !req.body.durationMs) {
-    return next(
-      new BadRequestError(
-        "Both 'name' and 'durationMs' are required bodies. Please send them both over.",
-      ),
-    );
-  }
-
-  if (!Number.isInteger(+req.body.durationMs) || req.body.durationMs <= 0) {
-    return next(
-      new BadRequestError(
-        "Body 'durationMs' is invalid. It must be a positive integer.",
-      ),
-    );
-  }
-
+  const { name, durationMs } = matchedData(req);
   const player = await prisma.player.findUnique({
     where: {
-      name: req.body.name,
+      name: name,
     },
     include: {
       record: true,
@@ -75,29 +58,29 @@ export async function createRecord(req, res, next) {
   });
 
   if (player) {
-    if (req.body.durationMs < player.record.durationMs) {
+    if (durationMs < player.record.durationMs) {
       const updateRecord = await prisma.record.update({
         where: {
           id: player.record.id,
         },
         data: {
-          durationMs: req.body.durationMs,
+          durationMs: durationMs,
         },
       });
-      return res.json(updateRecord); 
+      return res.json(updateRecord);
     } else {
       return res.json({
-        message: `Player ${player.name} did not beat their record. No update is made.`
-      })
+        message: `Player ${player.name} did not beat their record. No update is made.`,
+      });
     }
   }
 
   const createRecord = await prisma.record.create({
     data: {
-      durationMs: req.body.durationMs,
+      durationMs: durationMs,
       player: {
         create: {
-          name: req.body.name,
+          name: name,
         },
       },
     },
