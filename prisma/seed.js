@@ -117,6 +117,8 @@ export async function main() {
       heightPx: 8000,
       resourceUrl:
         "https://res.cloudinary.com/deohvijjz/image/upload/v1781776364/map_fl1qsu.jpg",
+      thumbnail: 
+        "https://res.cloudinary.com/deohvijjz/image/upload/c_crop,g_south,w_1200,h_700,q_40/v1781776364/map_fl1qsu.jpg"
     },
   });
 

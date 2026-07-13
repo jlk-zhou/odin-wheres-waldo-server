@@ -8,6 +8,24 @@ export async function getAllIllustrations(req, res, next) {
   return res.json(illustrations);
 }
 
+export async function getIllustration(req, res, next) {
+  const illustration = await prisma.illustration.findUnique({
+    where: {
+      id: req.params.illustrationId,
+    },
+  });
+
+  if (!illustration) {
+    return next(
+      new NotFoundError(
+        `Cannot find illustration with id '${req.params.illustrationId}'`,
+      ),
+    );
+  }
+
+  return res.json(illustration); 
+}
+
 export async function getIllustrationCharacters(req, res, next) {
   const illustration = await prisma.illustration.findUnique({
     where: {
