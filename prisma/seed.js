@@ -117,8 +117,236 @@ export async function main() {
       heightPx: 8000,
       resourceUrl:
         "https://res.cloudinary.com/deohvijjz/image/upload/v1781776364/map_fl1qsu.jpg",
-      thumbnail: 
-        "https://res.cloudinary.com/deohvijjz/image/upload/c_crop,g_south,w_1200,h_700,q_40/v1781776364/map_fl1qsu.jpg"
+      thumbnail:
+        "https://res.cloudinary.com/deohvijjz/image/upload/c_crop,g_south,w_1200,h_700,q_40/v1781776364/map_fl1qsu.jpg",
+    },
+  });
+
+  const artistEgor = await prisma.artist.findFirst({
+    where: {
+      name: "Egor Klyuchnyk",
+    },
+  });
+
+  const spaceCon = await prisma.illustration.create({
+    data: {
+      name: "Space-Con",
+      characters: {
+        create: [
+          {
+            name: "Goku",
+            xStartPx: 650,
+            xEndPx: 750,
+            yStartPx: 2050,
+            yEndPx: 2150,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107594/Goku_htiqrx.png",
+          },
+          {
+            name: "Yubaba",
+            xStartPx: 100,
+            xEndPx: 215,
+            yStartPx: 905,
+            yEndPx: 1020,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107594/Yubaba_vplrmk.png",
+          },
+          {
+            name: "Bathound",
+            xStartPx: 625,
+            xEndPx: 725,
+            yStartPx: 1555,
+            yEndPx: 1655,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Bathound_mpo6a8.png",
+          },
+          {
+            name: "Simp-wizard",
+            xStartPx: 520,
+            xEndPx: 620,
+            yStartPx: 2600,
+            yEndPx: 2700,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107594/Simp-wizard_j2al7o.png",
+          },
+          {
+            name: "Bugs Bunny",
+            xStartPx: 135,
+            xEndPx: 235,
+            yStartPx: 3280,
+            yEndPx: 3380,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Bugs_Bunny_olgsrg.png",
+          },
+          {
+            name: "Bubblehead",
+            xStartPx: 710,
+            xEndPx: 810,
+            yStartPx: 580,
+            yEndPx: 680,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Bubblehead_rcaqtq.png",
+          },
+          {
+            name: "Cursed Canine",
+            xStartPx: 630,
+            xEndPx: 710,
+            yStartPx: 2985,
+            yEndPx: 3065,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Cursed_Canine_joeeob.png",
+          },
+          {
+            name: "Frank",
+            xStartPx: 380,
+            xEndPx: 460,
+            yStartPx: 1630,
+            yEndPx: 1710,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107594/Frank_tqgn45.png",
+          },
+          {
+            name: "Daffy Duck",
+            xStartPx: 290,
+            xEndPx: 370,
+            yStartPx: 2160,
+            yEndPx: 2240,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Daffy_Duck_zfzrnu.png",
+          },
+          {
+            name: "Fat Boss",
+            xStartPx: 855,
+            xEndPx: 935,
+            yStartPx: 1167,
+            yEndPx: 1247,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107593/Fat_Boss_ecogfo.png",
+          },
+        ],
+      },
+      artist: {
+        connect: {
+          id: artistEgor.id,
+        },
+      },
+      widthPx: 1045,
+      heightPx: 3558,
+      resourceUrl:
+        "https://res.cloudinary.com/deohvijjz/image/upload/v1784107596/map_qw2dlu.jpg",
+      thumbnail:
+        "https://res.cloudinary.com/deohvijjz/image/upload/c_crop,w_1100,h_600,q_40/v1784107596/map_qw2dlu.jpg",
+    },
+  });
+
+  const universe11 = await prisma.illustration.create({
+    data: {
+      name: "Universe-11",
+      characters: {
+        create: [
+          {
+            name: "LMO Fish",
+            xStartPx: 330,
+            xEndPx: 410,
+            yStartPx: 350,
+            yEndPx: 430,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107625/LMO_Fish_otjm0s.png",
+          },
+          {
+            name: "Rabies Virus",
+            xStartPx: 40,
+            xEndPx: 120,
+            yStartPx: 1420,
+            yEndPx: 1500,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107625/Rabies_Virus_egde2n.png",
+          },
+          {
+            name: "Minion",
+            xStartPx: 155,
+            xEndPx: 215,
+            yStartPx: 1662,
+            yEndPx: 1722,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107627/Minion_hizbsb.png",
+          },
+          {
+            name: "Hog Rider",
+            xStartPx: 370,
+            xEndPx: 440,
+            yStartPx: 1540,
+            yEndPx: 1610,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107623/Hog_Rider_fcngmc.png",
+          },
+          {
+            name: "Jokat",
+            xStartPx: 370,
+            xEndPx: 440,
+            yStartPx: 2020,
+            yEndPx: 2090,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107624/Jokat_avlizi.png",
+          },
+          {
+            name: "Aura Farmer",
+            xStartPx: 35,
+            xEndPx: 105,
+            yStartPx: 955,
+            yEndPx: 1025,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107622/Aura_Farmer_lixkou.png",
+          },
+          {
+            name: "Umami",
+            xStartPx: 660,
+            xEndPx: 730,
+            yStartPx: 1510,
+            yEndPx: 1580,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107627/Umami_amavvg.png",
+          },
+          {
+            name: "Blob",
+            xStartPx: 450,
+            xEndPx: 550,
+            yStartPx: 913,
+            yEndPx: 1013,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107623/Blob_bnp7jh.png",
+          },
+          {
+            name: "Stomachead",
+            xStartPx: 325,
+            xEndPx: 385,
+            yStartPx: 1200,
+            yEndPx: 1260,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107626/Stomachead_kxkv0q.png",
+          },
+          {
+            name: "Lil Cadavre",
+            xStartPx: 195,
+            xEndPx: 255,
+            yStartPx: 1965,
+            yEndPx: 2025,
+            imageUrl:
+              "https://res.cloudinary.com/deohvijjz/image/upload/v1784107624/Lil_Cadavre_d9kzkn.png",
+          },
+        ],
+      },
+      artist: {
+        connect: {
+          id: artistEgor.id,
+        },
+      },
+      widthPx: 820,
+      heightPx: 2710,
+      resourceUrl:
+        "https://res.cloudinary.com/deohvijjz/image/upload/v1784107629/universe-11_jmyxhb.jpg",
+      thumbnail:
+        "https://res.cloudinary.com/deohvijjz/image/upload/c_crop,w_1100,h_600,q_40/v1784107629/universe-11_jmyxhb.jpg",
     },
   });
 
