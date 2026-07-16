@@ -12,7 +12,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
+const corsOptions = {
+  origin: `${process.env.CLIENT_URL}`, 
+  optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 app.use("/illustrations", routes.illustrations);
 app.use("/records", routes.records); 
